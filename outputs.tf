@@ -36,7 +36,7 @@ output "api_gateway_rest_apis_endpoint_access_mode" {
 }
 output "api_gateway_rest_apis_endpoint_configuration" {
   description = "Map of endpoint_configuration values across all api_gateway_rest_apis, keyed the same as var.api_gateway_rest_apis"
-  value       = { for k, v in aws_api_gateway_rest_api.api_gateway_rest_apis : k => v.endpoint_configuration if v.endpoint_configuration != null && length(v.endpoint_configuration) > 0 }
+  value       = { for k, v in aws_api_gateway_rest_api.api_gateway_rest_apis : k => one(v.endpoint_configuration) if v.endpoint_configuration != null && length(v.endpoint_configuration) > 0 }
 }
 output "api_gateway_rest_apis_execution_arn" {
   description = "Map of execution_arn values across all api_gateway_rest_apis, keyed the same as var.api_gateway_rest_apis"
